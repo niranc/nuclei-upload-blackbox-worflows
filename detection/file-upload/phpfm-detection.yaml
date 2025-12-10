@@ -1,0 +1,24 @@
+id: phpfm-detection
+
+info:
+  name: PHPFM Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de PHPFM sur le serveur
+  tags: phpfm,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/phpfm/"
+      - "{{BaseURL}}/php-fm/"
+      - "{{BaseURL}}/phpfm/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "PHPFM"
+          - "phpfm"
+          - "php-fm"
+        condition: or
+

@@ -1,0 +1,13 @@
+id: roxy-fileman-workflow
+
+info:
+  name: Roxy Fileman Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte Roxy Fileman et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/roxy-fileman-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/roxy-fileman-upload.yaml
+      - tags: roxy-fileman
+

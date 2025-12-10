@@ -1,0 +1,37 @@
+id: webfilemanager-upload
+
+info:
+  name: WebFileManager Upload Test
+  author: nuclei-templates
+  severity: high
+  description: Teste les endpoints d'upload de WebFileManager (très vulnérable)
+  tags: webfilemanager,file-upload,upload,obsolete
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/webfilemanager/upload.php"
+      - "{{BaseURL}}/webfilemanager/index.php"
+      - "{{BaseURL}}/wfm/upload.php"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

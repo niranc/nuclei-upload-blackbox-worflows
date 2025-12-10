@@ -1,0 +1,25 @@
+id: cpanel-filemanager-detection
+
+info:
+  name: cPanel File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de cPanel File Manager (anciennes versions)
+  tags: cpanel,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/cpanel/"
+      - "{{BaseURL}}/cpanel/filemanager/"
+      - "{{BaseURL}}/cpanel3/"
+      - "{{BaseURL}}/cpanel/filemanager/index.html"
+
+    matchers:
+      - type: word
+        words:
+          - "cPanel File Manager"
+          - "cpanel"
+          - "filemanager"
+        condition: or
+

@@ -1,0 +1,32 @@
+id: elfinder-upload
+
+info:
+  name: elFinder File Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload d'elFinder
+  tags: elfinder,file-upload,upload
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/elfinder/php/connector.minimal.php"
+      - "{{BaseURL}}/elfinder/php/connector.php"
+      - "{{BaseURL}}/elfinder/connector.php"
+      - "{{BaseURL}}/filemanager/elfinder/php/connector.php"
+
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+
+    body: "cmd=upload&target=l1_Lw&upload[]=test.txt"
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "added"
+          - "upload"
+        condition: or
+

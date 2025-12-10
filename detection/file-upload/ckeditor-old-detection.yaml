@@ -1,0 +1,24 @@
+id: ckeditor-old-detection
+
+info:
+  name: CKEditor Old Version Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'anciennes versions vulnérables de CKEditor
+  tags: ckeditor,editor,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/ckeditor/ckeditor.js"
+      - "{{BaseURL}}/ckeditor/"
+
+    matchers:
+      - type: word
+        words:
+          - "CKEditor"
+          - "version 3"
+          - "version 2"
+          - "CKEditor 2"
+        condition: or
+

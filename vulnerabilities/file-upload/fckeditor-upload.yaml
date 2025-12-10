@@ -1,0 +1,37 @@
+id: fckeditor-upload
+
+info:
+  name: FCKEditor Upload Test
+  author: nuclei-templates
+  severity: high
+  description: Teste les endpoints d'upload de FCKEditor (ancienne version vulnérable)
+  tags: fckeditor,file-upload,upload,obsolete
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/fckeditor/editor/filemanager/upload/"
+      - "{{BaseURL}}/FCKeditor/editor/filemanager/upload/"
+      - "{{BaseURL}}/fckeditor/editor/filemanager/browser/"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="NewFile"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

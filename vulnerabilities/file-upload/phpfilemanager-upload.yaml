@@ -1,0 +1,37 @@
+id: phpfilemanager-upload
+
+info:
+  name: PHPFileManager Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload de PHPFileManager
+  tags: phpfilemanager,file-upload,upload
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/phpfilemanager/upload.php"
+      - "{{BaseURL}}/php-filemanager/upload.php"
+      - "{{BaseURL}}/phpfilemanager/index.php"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

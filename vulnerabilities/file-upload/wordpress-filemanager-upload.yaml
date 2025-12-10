@@ -1,0 +1,37 @@
+id: wordpress-filemanager-upload
+
+info:
+  name: WordPress File Manager Upload Test
+  author: nuclei-templates
+  severity: high
+  description: Teste les endpoints d'upload des plugins WordPress File Manager (souvent vulnérables)
+  tags: wordpress,file-upload,upload,obsolete
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/wp-content/plugins/file-manager/lib/php/connector.php"
+      - "{{BaseURL}}/wp-content/plugins/wp-file-manager/lib/php/connector.php"
+      - "{{BaseURL}}/wp-content/plugins/filemanager/lib/php/connector.php"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="upload[]"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

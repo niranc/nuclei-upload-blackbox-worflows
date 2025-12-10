@@ -1,0 +1,28 @@
+id: webdav-detection
+
+info:
+  name: WebDAV Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de WebDAV sur le serveur
+  tags: webdav,file-upload,upload
+
+http:
+  - method: PROPFIND
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/webdav/"
+
+    headers:
+      Depth: 0
+
+    matchers:
+      - type: status
+        status:
+          - 207
+      - type: word
+        words:
+          - "DAV:"
+          - "multistatus"
+        condition: or
+

@@ -1,0 +1,36 @@
+id: joomla-filemanager-upload
+
+info:
+  name: Joomla File Manager Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload du gestionnaire de fichiers Joomla
+  tags: joomla,file-upload,upload,obsolete
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/administrator/components/com_media/"
+      - "{{BaseURL}}/administrator/index.php?option=com_media&task=upload"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

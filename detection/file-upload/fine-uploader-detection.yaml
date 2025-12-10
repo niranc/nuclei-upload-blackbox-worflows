@@ -1,0 +1,25 @@
+id: fine-uploader-detection
+
+info:
+  name: Fine Uploader Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Fine Uploader sur le serveur
+  tags: fine-uploader,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/fine-uploader/fine-uploader.min.js"
+      - "{{BaseURL}}/assets/fine-uploader/fine-uploader.min.js"
+      - "{{BaseURL}}/js/fine-uploader/fine-uploader.min.js"
+      - "{{BaseURL}}/libs/fine-uploader/fine-uploader.min.js"
+      - "{{BaseURL}}/fine-uploader/"
+
+    matchers:
+      - type: word
+        words:
+          - "fine-uploader"
+          - "Fine Uploader"
+        condition: or
+

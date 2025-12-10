@@ -1,0 +1,25 @@
+id: plupload-detection
+
+info:
+  name: Plupload Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Plupload sur le serveur
+  tags: plupload,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/plupload/js/plupload.min.js"
+      - "{{BaseURL}}/assets/plupload/js/plupload.min.js"
+      - "{{BaseURL}}/js/plupload/js/plupload.min.js"
+      - "{{BaseURL}}/libs/plupload/js/plupload.min.js"
+      - "{{BaseURL}}/plupload/"
+
+    matchers:
+      - type: word
+        words:
+          - "Plupload"
+          - "plupload.min.js"
+        condition: or
+

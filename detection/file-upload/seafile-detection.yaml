@@ -1,0 +1,24 @@
+id: seafile-detection
+
+info:
+  name: Seafile Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Seafile sur le serveur
+  tags: seafile,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/seafile/"
+      - "{{BaseURL}}/seahub/"
+      - "{{BaseURL}}/seafile/accounts/login/"
+
+    matchers:
+      - type: word
+        words:
+          - "Seafile"
+          - "seafile"
+          - "seahub"
+        condition: or
+

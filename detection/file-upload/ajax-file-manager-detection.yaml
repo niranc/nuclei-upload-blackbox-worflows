@@ -1,0 +1,23 @@
+id: ajax-file-manager-detection
+
+info:
+  name: Ajax File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'Ajax File Manager sur le serveur
+  tags: ajax-file-manager,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/ajaxfilemanager/"
+      - "{{BaseURL}}/ajax-file-manager/"
+      - "{{BaseURL}}/assets/ajaxfilemanager/"
+
+    matchers:
+      - type: word
+        words:
+          - "Ajax File Manager"
+          - "ajaxfilemanager"
+        condition: or
+

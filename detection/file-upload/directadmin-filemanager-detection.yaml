@@ -1,0 +1,24 @@
+id: directadmin-filemanager-detection
+
+info:
+  name: DirectAdmin File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de DirectAdmin File Manager (anciennes versions)
+  tags: directadmin,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/directadmin/"
+      - "{{BaseURL}}/directadmin/file-manager/"
+      - "{{BaseURL}}/directadmin/filemanager/"
+
+    matchers:
+      - type: word
+        words:
+          - "DirectAdmin File Manager"
+          - "directadmin"
+          - "file-manager"
+        condition: or
+

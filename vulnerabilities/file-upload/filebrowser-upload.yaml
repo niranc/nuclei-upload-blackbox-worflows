@@ -1,0 +1,37 @@
+id: filebrowser-upload
+
+info:
+  name: FileBrowser Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload de FileBrowser
+  tags: filebrowser,file-upload,upload
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/filebrowser/api/upload"
+      - "{{BaseURL}}/file-browser/api/upload"
+      - "{{BaseURL}}/fb/api/upload"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

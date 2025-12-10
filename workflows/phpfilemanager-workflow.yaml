@@ -1,0 +1,13 @@
+id: phpfilemanager-workflow
+
+info:
+  name: PHPFileManager Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte PHPFileManager et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/phpfilemanager-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/phpfilemanager-upload.yaml
+      - tags: phpfilemanager
+

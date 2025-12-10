@@ -1,0 +1,24 @@
+id: ws-ftp-detection
+
+info:
+  name: WS_FTP Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de WS_FTP (ancien client FTP web, obsolète)
+  tags: ws-ftp,ftp,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/ws-ftp/"
+      - "{{BaseURL}}/wsftp/"
+      - "{{BaseURL}}/ws_ftp/"
+
+    matchers:
+      - type: word
+        words:
+          - "WS_FTP"
+          - "ws-ftp"
+          - "wsftp"
+        condition: or
+

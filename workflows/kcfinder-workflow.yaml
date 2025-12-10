@@ -1,0 +1,13 @@
+id: kcfinder-workflow
+
+info:
+  name: KCFinder Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte KCFinder et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/kcfinder-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/kcfinder-upload.yaml
+      - tags: kcfinder
+

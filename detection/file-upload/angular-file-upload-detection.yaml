@@ -1,0 +1,25 @@
+id: angular-file-upload-detection
+
+info:
+  name: Angular File Upload Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'Angular File Upload sur le serveur
+  tags: angular,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/angular-file-upload/angular-file-upload.min.js"
+      - "{{BaseURL}}/assets/angular-file-upload/angular-file-upload.min.js"
+      - "{{BaseURL}}/js/angular-file-upload/angular-file-upload.min.js"
+      - "{{BaseURL}}/libs/angular-file-upload/angular-file-upload.min.js"
+      - "{{BaseURL}}/angular-file-upload/"
+
+    matchers:
+      - type: word
+        words:
+          - "angular-file-upload"
+          - "Angular File Upload"
+        condition: or
+

@@ -1,0 +1,37 @@
+id: uppyio-upload
+
+info:
+  name: Uppy.io Companion Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload d'Uppy.io Companion
+  tags: uppyio,file-upload,upload
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/companion/upload"
+      - "{{BaseURL}}/uppy-companion/upload"
+      - "{{BaseURL}}/companion/multipart"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

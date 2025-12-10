@@ -1,0 +1,24 @@
+id: net2ftp-detection
+
+info:
+  name: Net2FTP Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Net2FTP (client FTP web obsolète)
+  tags: net2ftp,ftp,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/net2ftp/"
+      - "{{BaseURL}}/net2ftp/index.php"
+      - "{{BaseURL}}/ftp/net2ftp/"
+
+    matchers:
+      - type: word
+        words:
+          - "Net2FTP"
+          - "net2ftp"
+          - "net2ftp.js"
+        condition: or
+

@@ -1,0 +1,13 @@
+id: filebrowser-workflow
+
+info:
+  name: FileBrowser Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte FileBrowser et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/filebrowser-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/filebrowser-upload.yaml
+      - tags: filebrowser
+

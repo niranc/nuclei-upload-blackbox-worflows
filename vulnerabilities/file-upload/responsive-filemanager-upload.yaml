@@ -1,0 +1,46 @@
+id: responsive-filemanager-upload
+
+info:
+  name: Responsive FileManager Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload de Responsive FileManager
+  tags: responsive-filemanager,file-upload,upload
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/filemanager/execute.php"
+      - "{{BaseURL}}/filemanager/dialog.php"
+      - "{{BaseURL}}/responsivefilemanager/execute.php"
+      - "{{BaseURL}}/responsivefilemanager/dialog.php"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="action"
+
+      upload
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="path"
+
+      /
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

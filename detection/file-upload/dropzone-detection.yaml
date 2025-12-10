@@ -1,0 +1,26 @@
+id: dropzone-detection
+
+info:
+  name: Dropzone Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Dropzone sur le serveur
+  tags: dropzone,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/dropzone/dropzone.min.js"
+      - "{{BaseURL}}/assets/dropzone/dropzone.min.js"
+      - "{{BaseURL}}/js/dropzone/dropzone.min.js"
+      - "{{BaseURL}}/libs/dropzone/dropzone.min.js"
+      - "{{BaseURL}}/vendor/dropzone/dropzone.min.js"
+      - "{{BaseURL}}/dropzone/"
+
+    matchers:
+      - type: word
+        words:
+          - "Dropzone"
+          - "dropzone.min.js"
+        condition: or
+

@@ -1,0 +1,24 @@
+id: filegator-detection
+
+info:
+  name: FileGator Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de FileGator sur le serveur
+  tags: filegator,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/filegator/"
+      - "{{BaseURL}}/file-gator/"
+      - "{{BaseURL}}/fg/"
+
+    matchers:
+      - type: word
+        words:
+          - "FileGator"
+          - "filegator"
+          - "file-gator"
+        condition: or
+

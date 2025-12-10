@@ -1,0 +1,24 @@
+id: tinymce-old-detection
+
+info:
+  name: TinyMCE Old Version Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'anciennes versions vulnérables de TinyMCE
+  tags: tinymce,editor,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/tinymce/tinymce.min.js"
+      - "{{BaseURL}}/tinymce/"
+
+    matchers:
+      - type: word
+        words:
+          - "TinyMCE"
+          - "version 3"
+          - "version 2"
+          - "TinyMCE 2"
+        condition: or
+

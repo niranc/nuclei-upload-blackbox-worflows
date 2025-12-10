@@ -1,0 +1,24 @@
+id: drupal-filemanager-detection
+
+info:
+  name: Drupal File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence du gestionnaire de fichiers de Drupal (anciennes versions)
+  tags: drupal,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/drupal/"
+      - "{{BaseURL}}/sites/default/files/"
+      - "{{BaseURL}}/file/"
+
+    matchers:
+      - type: word
+        words:
+          - "Drupal"
+          - "drupal"
+          - "file manager"
+        condition: or
+

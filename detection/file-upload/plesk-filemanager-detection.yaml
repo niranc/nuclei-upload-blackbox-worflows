@@ -1,0 +1,24 @@
+id: plesk-filemanager-detection
+
+info:
+  name: Plesk File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Plesk File Manager (anciennes versions)
+  tags: plesk,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/plesk/"
+      - "{{BaseURL}}/plesk/file-manager/"
+      - "{{BaseURL}}/plesk/filemanager/"
+
+    matchers:
+      - type: word
+        words:
+          - "Plesk File Manager"
+          - "plesk"
+          - "file-manager"
+        condition: or
+

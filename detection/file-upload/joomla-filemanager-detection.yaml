@@ -1,0 +1,24 @@
+id: joomla-filemanager-detection
+
+info:
+  name: Joomla File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence du gestionnaire de fichiers de Joomla (anciennes versions)
+  tags: joomla,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/joomla/"
+      - "{{BaseURL}}/administrator/components/com_media/"
+      - "{{BaseURL}}/administrator/index.php?option=com_media"
+
+    matchers:
+      - type: word
+        words:
+          - "Joomla"
+          - "com_media"
+          - "filemanager"
+        condition: or
+

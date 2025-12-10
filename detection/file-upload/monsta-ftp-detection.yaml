@@ -1,0 +1,25 @@
+id: monsta-ftp-detection
+
+info:
+  name: Monsta FTP Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Monsta FTP sur le serveur
+  tags: monsta-ftp,file-manager,ftp,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/monsta-ftp/"
+      - "{{BaseURL}}/monsta/"
+      - "{{BaseURL}}/ftp/"
+      - "{{BaseURL}}/filemanager/monsta/"
+
+    matchers:
+      - type: word
+        words:
+          - "Monsta FTP"
+          - "monsta-ftp"
+          - "monsta.js"
+        condition: or
+

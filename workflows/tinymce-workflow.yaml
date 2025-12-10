@@ -1,0 +1,13 @@
+id: tinymce-workflow
+
+info:
+  name: TinyMCE Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte TinyMCE et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/tinymce-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/tinymce-upload.yaml
+      - tags: tinymce
+

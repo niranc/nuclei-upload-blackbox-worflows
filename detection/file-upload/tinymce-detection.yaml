@@ -1,0 +1,27 @@
+id: tinymce-detection
+
+info:
+  name: TinyMCE Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de TinyMCE sur le serveur
+  tags: tinymce,editor,file-upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/tinymce/tinymce.min.js"
+      - "{{BaseURL}}/assets/tinymce/tinymce.min.js"
+      - "{{BaseURL}}/js/tinymce/tinymce.min.js"
+      - "{{BaseURL}}/libs/tinymce/tinymce.min.js"
+      - "{{BaseURL}}/vendor/tinymce/tinymce.min.js"
+      - "{{BaseURL}}/tinymce/"
+
+    matchers:
+      - type: word
+        words:
+          - "TinyMCE"
+          - "tinymce.min.js"
+          - "tinymce"
+        condition: or
+

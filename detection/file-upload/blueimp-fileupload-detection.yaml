@@ -1,0 +1,25 @@
+id: blueimp-fileupload-detection
+
+info:
+  name: jQuery File Upload (blueimp) Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de jQuery File Upload sur le serveur
+  tags: jquery-file-upload,blueimp,file-upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/jquery-file-upload/js/jquery.fileupload.min.js"
+      - "{{BaseURL}}/assets/jquery-file-upload/js/jquery.fileupload.min.js"
+      - "{{BaseURL}}/js/jquery-file-upload/js/jquery.fileupload.min.js"
+      - "{{BaseURL}}/libs/jquery-file-upload/js/jquery.fileupload.min.js"
+      - "{{BaseURL}}/jquery-file-upload/"
+
+    matchers:
+      - type: word
+        words:
+          - "jquery.fileupload"
+          - "jQuery File Upload"
+        condition: or
+

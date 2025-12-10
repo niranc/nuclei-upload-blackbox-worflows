@@ -1,0 +1,29 @@
+id: ckeditor-detection
+
+info:
+  name: CKEditor Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de CKEditor sur le serveur
+  tags: ckeditor,editor,file-upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/ckeditor/ckeditor.js"
+      - "{{BaseURL}}/assets/ckeditor/ckeditor.js"
+      - "{{BaseURL}}/js/ckeditor/ckeditor.js"
+      - "{{BaseURL}}/libs/ckeditor/ckeditor.js"
+      - "{{BaseURL}}/vendor/ckeditor/ckeditor.js"
+      - "{{BaseURL}}/ckeditor/"
+      - "{{BaseURL}}/ckeditor/plugins/"
+      - "{{BaseURL}}/ckeditor/samples/"
+
+    matchers:
+      - type: word
+        words:
+          - "CKEditor"
+          - "ckeditor.js"
+          - "CKEDITOR"
+        condition: or
+

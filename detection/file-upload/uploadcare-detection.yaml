@@ -1,0 +1,24 @@
+id: uploadcare-detection
+
+info:
+  name: Uploadcare Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'Uploadcare sur le serveur
+  tags: uploadcare,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/uploadcare/"
+      - "{{BaseURL}}/uc/"
+      - "{{BaseURL}}/assets/uploadcare/"
+
+    matchers:
+      - type: word
+        words:
+          - "Uploadcare"
+          - "uploadcare"
+          - "uploadcare.js"
+        condition: or
+

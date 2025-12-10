@@ -1,0 +1,36 @@
+id: net2ftp-upload
+
+info:
+  name: Net2FTP Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload de Net2FTP
+  tags: net2ftp,file-upload,upload,obsolete
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/net2ftp/index.php"
+      - "{{BaseURL}}/net2ftp/upload.php"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

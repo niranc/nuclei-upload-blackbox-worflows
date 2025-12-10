@@ -1,0 +1,36 @@
+id: cpanel-filemanager-upload
+
+info:
+  name: cPanel File Manager Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload de cPanel File Manager
+  tags: cpanel,file-upload,upload,obsolete
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/cpanel/filemanager/"
+      - "{{BaseURL}}/cpanel3/filemanager/"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

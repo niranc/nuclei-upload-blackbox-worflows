@@ -1,0 +1,156 @@
+id: file-upload-workflow
+
+info:
+  name: File Upload Security Checks
+  author: nuclei-templates
+  description: Workflow qui exécute toutes les vérifications de sécurité liées aux systèmes d'upload et de visualisation de fichiers
+
+workflows:
+  - template: detection/file-upload/ckeditor-detection.yaml
+    subtemplates:
+      - tags: ckeditor
+  - template: detection/file-upload/ckfinder-detection.yaml
+    subtemplates:
+      - tags: ckfinder
+  - template: detection/file-upload/tinymce-detection.yaml
+    subtemplates:
+      - tags: tinymce
+  - template: detection/file-upload/elfinder-detection.yaml
+    subtemplates:
+      - tags: elfinder
+  - template: detection/file-upload/kcfinder-detection.yaml
+    subtemplates:
+      - tags: kcfinder
+  - template: detection/file-upload/responsive-filemanager-detection.yaml
+    subtemplates:
+      - tags: responsive-filemanager
+  - template: detection/file-upload/tiny-file-manager-detection.yaml
+    subtemplates:
+      - tags: tiny-file-manager
+  - template: detection/file-upload/monsta-ftp-detection.yaml
+    subtemplates:
+      - tags: monsta-ftp
+  - template: detection/file-upload/filerun-detection.yaml
+    subtemplates:
+      - tags: filerun
+  - template: detection/file-upload/pydio-detection.yaml
+    subtemplates:
+      - tags: pydio
+  - template: detection/file-upload/seafile-detection.yaml
+    subtemplates:
+      - tags: seafile
+  - template: detection/file-upload/owncloud-detection.yaml
+    subtemplates:
+      - tags: owncloud
+  - template: detection/file-upload/nextcloud-detection.yaml
+    subtemplates:
+      - tags: nextcloud
+  - template: detection/file-upload/filebrowser-detection.yaml
+    subtemplates:
+      - tags: filebrowser
+  - template: detection/file-upload/filegator-detection.yaml
+    subtemplates:
+      - tags: filegator
+  - template: detection/file-upload/roxy-fileman-detection.yaml
+    subtemplates:
+      - tags: roxy-fileman
+  - template: detection/file-upload/phpfm-detection.yaml
+    subtemplates:
+      - tags: phpfm
+  - template: detection/file-upload/phpfilemanager-detection.yaml
+    subtemplates:
+      - tags: phpfilemanager
+  - template: detection/file-upload/cloudreve-detection.yaml
+    subtemplates:
+      - tags: cloudreve
+  - template: detection/file-upload/webdav-detection.yaml
+    subtemplates:
+      - tags: webdav
+  - template: detection/file-upload/h5ai-detection.yaml
+    subtemplates:
+      - tags: h5ai
+  - template: detection/file-upload/directory-lister-detection.yaml
+    subtemplates:
+      - tags: directory-lister
+  - template: detection/file-upload/fckeditor-detection.yaml
+    subtemplates:
+      - tags: fckeditor
+  - template: detection/file-upload/net2ftp-detection.yaml
+    subtemplates:
+      - tags: net2ftp
+  - template: detection/file-upload/webfilemanager-detection.yaml
+    subtemplates:
+      - tags: webfilemanager
+  - template: detection/file-upload/simple-file-manager-detection.yaml
+    subtemplates:
+      - tags: simple-file-manager
+  - template: detection/file-upload/advanced-file-manager-detection.yaml
+    subtemplates:
+      - tags: advanced-file-manager
+  - template: detection/file-upload/filemanager-pro-detection.yaml
+    subtemplates:
+      - tags: filemanager-pro
+  - template: detection/file-upload/cpanel-filemanager-detection.yaml
+    subtemplates:
+      - tags: cpanel
+  - template: detection/file-upload/plesk-filemanager-detection.yaml
+    subtemplates:
+      - tags: plesk
+  - template: detection/file-upload/directadmin-filemanager-detection.yaml
+    subtemplates:
+      - tags: directadmin
+  - template: detection/file-upload/cutefm-detection.yaml
+    subtemplates:
+      - tags: cutefm
+  - template: detection/file-upload/anywhere-ftp-detection.yaml
+    subtemplates:
+      - tags: anywhere-ftp
+  - template: detection/file-upload/filezilla-server-web-detection.yaml
+    subtemplates:
+      - tags: filezilla
+  - template: detection/file-upload/ws-ftp-detection.yaml
+    subtemplates:
+      - tags: ws-ftp
+  - template: detection/file-upload/phpmyadmin-filemanager-detection.yaml
+    subtemplates:
+      - tags: phpmyadmin
+  - template: detection/file-upload/joomla-filemanager-detection.yaml
+    subtemplates:
+      - tags: joomla
+  - template: detection/file-upload/drupal-filemanager-detection.yaml
+    subtemplates:
+      - tags: drupal
+  - template: detection/file-upload/joomla-explorer-detection.yaml
+    subtemplates:
+      - tags: joomla-explorer
+  - template: detection/file-upload/joomla-xplorer-detection.yaml
+    subtemplates:
+      - tags: joomla-xplorer
+  - template: detection/file-upload/wordpress-filemanager-detection.yaml
+    subtemplates:
+      - tags: wordpress
+  - template: detection/file-upload/php-shell-detection.yaml
+    subtemplates:
+      - tags: php-shell
+  - template: detection/file-upload/asp-shell-detection.yaml
+    subtemplates:
+      - tags: asp-shell
+  - template: detection/file-upload/phpfm-old-detection.yaml
+    subtemplates:
+      - tags: phpfm
+  - template: detection/file-upload/phpfilemanager-old-detection.yaml
+    subtemplates:
+      - tags: phpfilemanager
+  - template: detection/file-upload/tinyfilemanager-old-detection.yaml
+    subtemplates:
+      - tags: tiny-file-manager
+  - template: detection/file-upload/ajaxplorer-old-detection.yaml
+    subtemplates:
+      - tags: ajaxplorer
+  - template: detection/file-upload/ckeditor-old-detection.yaml
+    subtemplates:
+      - tags: ckeditor
+  - template: detection/file-upload/tinymce-old-detection.yaml
+    subtemplates:
+      - tags: tinymce
+

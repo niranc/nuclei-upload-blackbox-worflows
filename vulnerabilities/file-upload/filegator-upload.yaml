@@ -1,0 +1,37 @@
+id: filegator-upload
+
+info:
+  name: FileGator Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload de FileGator
+  tags: filegator,file-upload,upload
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/filegator/index.php"
+      - "{{BaseURL}}/file-gator/index.php"
+      - "{{BaseURL}}/fg/index.php"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="upload"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

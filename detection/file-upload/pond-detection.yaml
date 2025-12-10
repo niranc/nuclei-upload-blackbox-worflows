@@ -1,0 +1,24 @@
+id: pond-detection
+
+info:
+  name: FilePond Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de FilePond sur le serveur
+  tags: filepond,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/filepond/"
+      - "{{BaseURL}}/filepond/filepond.min.js"
+      - "{{BaseURL}}/assets/filepond/"
+
+    matchers:
+      - type: word
+        words:
+          - "FilePond"
+          - "filepond"
+          - "filepond.min.js"
+        condition: or
+

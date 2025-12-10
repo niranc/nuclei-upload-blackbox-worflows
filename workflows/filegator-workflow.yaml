@@ -1,0 +1,13 @@
+id: filegator-workflow
+
+info:
+  name: FileGator Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte FileGator et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/filegator-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/filegator-upload.yaml
+      - tags: filegator
+

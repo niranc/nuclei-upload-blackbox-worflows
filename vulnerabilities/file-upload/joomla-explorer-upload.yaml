@@ -1,0 +1,36 @@
+id: joomla-explorer-upload
+
+info:
+  name: Joomla Explorer Upload Test
+  author: nuclei-templates
+  severity: high
+  description: Teste les endpoints d'upload de Joomla Explorer (très vulnérable)
+  tags: joomla-explorer,file-upload,upload,obsolete
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/administrator/components/com_joomlaexplorer/upload.php"
+      - "{{BaseURL}}/components/com_joomlaexplorer/upload.php"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

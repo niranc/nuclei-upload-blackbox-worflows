@@ -1,0 +1,37 @@
+id: monsta-ftp-upload
+
+info:
+  name: Monsta FTP Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload de Monsta FTP
+  tags: monsta-ftp,file-upload,upload
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/monsta-ftp/upload.php"
+      - "{{BaseURL}}/monsta/upload.php"
+      - "{{BaseURL}}/ftp/upload.php"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

@@ -1,0 +1,23 @@
+id: joomla-xplorer-detection
+
+info:
+  name: Joomla Xplorer Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Joomla Xplorer (ancien composant, obsolète)
+  tags: joomla-xplorer,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/administrator/components/com_xplorer/"
+      - "{{BaseURL}}/components/com_xplorer/"
+
+    matchers:
+      - type: word
+        words:
+          - "Joomla Xplorer"
+          - "xplorer"
+          - "com_xplorer"
+        condition: or
+

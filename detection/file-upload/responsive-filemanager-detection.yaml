@@ -1,0 +1,27 @@
+id: responsive-filemanager-detection
+
+info:
+  name: Responsive FileManager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Responsive FileManager sur le serveur
+  tags: responsive-filemanager,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/filemanager/"
+      - "{{BaseURL}}/filemanager/index.html"
+      - "{{BaseURL}}/assets/filemanager/"
+      - "{{BaseURL}}/js/filemanager/"
+      - "{{BaseURL}}/libs/filemanager/"
+      - "{{BaseURL}}/responsivefilemanager/"
+
+    matchers:
+      - type: word
+        words:
+          - "Responsive FileManager"
+          - "filemanager"
+          - "filemanager.min.js"
+        condition: or
+

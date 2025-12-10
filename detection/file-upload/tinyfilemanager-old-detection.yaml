@@ -1,0 +1,24 @@
+id: tinyfilemanager-old-detection
+
+info:
+  name: Tiny File Manager Old Version Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'anciennes versions vulnérables de Tiny File Manager
+  tags: tiny-file-manager,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/tinyfilemanager.php"
+      - "{{BaseURL}}/filemanager.php"
+
+    matchers:
+      - type: word
+        words:
+          - "Tiny File Manager"
+          - "version 1.0"
+          - "version 1.1"
+          - "version 1.2"
+        condition: or
+

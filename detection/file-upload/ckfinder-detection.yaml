@@ -1,0 +1,26 @@
+id: ckfinder-detection
+
+info:
+  name: CKFinder Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de CKFinder sur le serveur
+  tags: ckfinder,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/ckfinder/ckfinder.html"
+      - "{{BaseURL}}/ckfinder/"
+      - "{{BaseURL}}/assets/ckfinder/"
+      - "{{BaseURL}}/js/ckfinder/"
+      - "{{BaseURL}}/libs/ckfinder/"
+
+    matchers:
+      - type: word
+        words:
+          - "CKFinder"
+          - "ckfinder.js"
+          - "ckfinder.html"
+        condition: or
+

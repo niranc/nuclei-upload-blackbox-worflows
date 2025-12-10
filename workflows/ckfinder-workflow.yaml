@@ -1,0 +1,13 @@
+id: ckfinder-workflow
+
+info:
+  name: CKFinder Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte CKFinder et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/ckfinder-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/ckfinder-upload.yaml
+      - tags: ckfinder
+

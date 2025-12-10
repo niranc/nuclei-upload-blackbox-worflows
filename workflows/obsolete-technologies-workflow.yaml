@@ -1,0 +1,99 @@
+id: obsolete-technologies-workflow
+
+info:
+  name: Obsolete Technologies Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte et teste les technologies obsolètes et vulnérables
+
+workflows:
+  - template: detection/file-upload/fckeditor-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/fckeditor-upload.yaml
+      - tags: fckeditor
+  - template: detection/file-upload/net2ftp-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/net2ftp-upload.yaml
+      - tags: net2ftp
+  - template: detection/file-upload/webfilemanager-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/webfilemanager-upload.yaml
+      - tags: webfilemanager
+  - template: detection/file-upload/joomla-filemanager-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/joomla-filemanager-upload.yaml
+      - tags: joomla
+  - template: detection/file-upload/joomla-explorer-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/joomla-explorer-upload.yaml
+      - tags: joomla-explorer
+  - template: detection/file-upload/joomla-xplorer-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/joomla-xplorer-upload.yaml
+      - tags: joomla-xplorer
+  - template: detection/file-upload/wordpress-filemanager-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/wordpress-filemanager-upload.yaml
+      - tags: wordpress
+  - template: detection/file-upload/php-shell-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/php-shell-upload.yaml
+      - tags: php-shell
+  - template: detection/file-upload/cpanel-filemanager-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/cpanel-filemanager-upload.yaml
+      - tags: cpanel
+  - template: detection/file-upload/simple-file-manager-detection.yaml
+    subtemplates:
+      - tags: simple-file-manager
+  - template: detection/file-upload/advanced-file-manager-detection.yaml
+    subtemplates:
+      - tags: advanced-file-manager
+  - template: detection/file-upload/filemanager-pro-detection.yaml
+    subtemplates:
+      - tags: filemanager-pro
+  - template: detection/file-upload/plesk-filemanager-detection.yaml
+    subtemplates:
+      - tags: plesk
+  - template: detection/file-upload/directadmin-filemanager-detection.yaml
+    subtemplates:
+      - tags: directadmin
+  - template: detection/file-upload/cutefm-detection.yaml
+    subtemplates:
+      - tags: cutefm
+  - template: detection/file-upload/anywhere-ftp-detection.yaml
+    subtemplates:
+      - tags: anywhere-ftp
+  - template: detection/file-upload/filezilla-server-web-detection.yaml
+    subtemplates:
+      - tags: filezilla
+  - template: detection/file-upload/ws-ftp-detection.yaml
+    subtemplates:
+      - tags: ws-ftp
+  - template: detection/file-upload/phpmyadmin-filemanager-detection.yaml
+    subtemplates:
+      - tags: phpmyadmin
+  - template: detection/file-upload/drupal-filemanager-detection.yaml
+    subtemplates:
+      - tags: drupal
+  - template: detection/file-upload/asp-shell-detection.yaml
+    subtemplates:
+      - tags: asp-shell
+  - template: detection/file-upload/phpfm-old-detection.yaml
+    subtemplates:
+      - tags: phpfm
+  - template: detection/file-upload/phpfilemanager-old-detection.yaml
+    subtemplates:
+      - tags: phpfilemanager
+  - template: detection/file-upload/tinyfilemanager-old-detection.yaml
+    subtemplates:
+      - tags: tiny-file-manager
+  - template: detection/file-upload/ajaxplorer-old-detection.yaml
+    subtemplates:
+      - tags: ajaxplorer
+  - template: detection/file-upload/ckeditor-old-detection.yaml
+    subtemplates:
+      - tags: ckeditor
+  - template: detection/file-upload/tinymce-old-detection.yaml
+    subtemplates:
+      - tags: tinymce
+

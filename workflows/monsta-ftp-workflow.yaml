@@ -1,0 +1,13 @@
+id: monsta-ftp-workflow
+
+info:
+  name: Monsta FTP Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte Monsta FTP et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/monsta-ftp-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/monsta-ftp-upload.yaml
+      - tags: monsta-ftp
+

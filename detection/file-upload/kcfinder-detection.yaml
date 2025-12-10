@@ -1,0 +1,26 @@
+id: kcfinder-detection
+
+info:
+  name: KCFinder Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de KCFinder sur le serveur
+  tags: kcfinder,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/kcfinder/"
+      - "{{BaseURL}}/kcfinder/browse.php"
+      - "{{BaseURL}}/assets/kcfinder/"
+      - "{{BaseURL}}/js/kcfinder/"
+      - "{{BaseURL}}/libs/kcfinder/"
+
+    matchers:
+      - type: word
+        words:
+          - "KCFinder"
+          - "kcfinder"
+          - "browse.php"
+        condition: or
+

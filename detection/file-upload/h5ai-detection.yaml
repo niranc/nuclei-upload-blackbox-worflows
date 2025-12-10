@@ -1,0 +1,24 @@
+id: h5ai-detection
+
+info:
+  name: h5ai Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de h5ai sur le serveur
+  tags: h5ai,file-manager,directory-listing
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/_h5ai/"
+      - "{{BaseURL}}/h5ai/"
+      - "{{BaseURL}}/_h5ai/public/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "h5ai"
+          - "_h5ai"
+          - "h5ai-powered"
+        condition: or
+

@@ -1,0 +1,24 @@
+id: explorerjs-detection
+
+info:
+  name: ExplorerJS Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'ExplorerJS sur le serveur
+  tags: explorerjs,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/explorerjs/"
+      - "{{BaseURL}}/explorer-js/"
+      - "{{BaseURL}}/explorer/"
+
+    matchers:
+      - type: word
+        words:
+          - "ExplorerJS"
+          - "explorerjs"
+          - "explorer.js"
+        condition: or
+

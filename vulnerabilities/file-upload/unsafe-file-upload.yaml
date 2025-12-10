@@ -1,0 +1,41 @@
+id: unsafe-file-upload
+
+info:
+  name: Unsafe File Type Upload Test
+  author: nuclei-templates
+  severity: high
+  description: Teste l'upload de types de fichiers potentiellement dangereux
+  tags: file-upload,upload,security,unsafe
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/upload.php"
+      - "{{BaseURL}}/upload.aspx"
+      - "{{BaseURL}}/upload.jsp"
+      - "{{BaseURL}}/file/upload"
+      - "{{BaseURL}}/files/upload"
+      - "{{BaseURL}}/filemanager/upload"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.php"
+      Content-Type: application/x-php
+
+      <?php phpinfo(); ?>
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+          - ".php"
+        condition: or
+

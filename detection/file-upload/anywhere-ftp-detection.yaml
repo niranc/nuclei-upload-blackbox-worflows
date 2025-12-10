@@ -1,0 +1,24 @@
+id: anywhere-ftp-detection
+
+info:
+  name: Anywhere FTP Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'Anywhere FTP (client FTP web obsolète)
+  tags: anywhere-ftp,ftp,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/anywhere-ftp/"
+      - "{{BaseURL}}/anywhereftp/"
+      - "{{BaseURL}}/anywhere-ftp/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "Anywhere FTP"
+          - "anywhere-ftp"
+          - "anywhereftp"
+        condition: or
+

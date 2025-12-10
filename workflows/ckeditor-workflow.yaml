@@ -1,0 +1,13 @@
+id: ckeditor-workflow
+
+info:
+  name: CKEditor Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte CKEditor et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/ckeditor-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/ckeditor-upload.yaml
+      - tags: ckeditor
+

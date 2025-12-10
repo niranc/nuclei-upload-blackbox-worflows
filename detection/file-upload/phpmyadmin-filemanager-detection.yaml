@@ -1,0 +1,25 @@
+id: phpmyadmin-filemanager-detection
+
+info:
+  name: phpMyAdmin File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence du gestionnaire de fichiers de phpMyAdmin (anciennes versions)
+  tags: phpmyadmin,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/phpmyadmin/"
+      - "{{BaseURL}}/phpMyAdmin/"
+      - "{{BaseURL}}/pma/"
+      - "{{BaseURL}}/phpmyadmin/filemanager/"
+
+    matchers:
+      - type: word
+        words:
+          - "phpMyAdmin"
+          - "phpmyadmin"
+          - "filemanager"
+        condition: or
+

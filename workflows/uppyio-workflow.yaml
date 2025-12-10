@@ -1,0 +1,13 @@
+id: uppyio-workflow
+
+info:
+  name: Uppy.io Companion Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte Uppy.io Companion et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/uppyio-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/uppyio-upload.yaml
+      - tags: uppyio
+

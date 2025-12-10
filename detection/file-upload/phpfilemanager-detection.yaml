@@ -1,0 +1,24 @@
+id: phpfilemanager-detection
+
+info:
+  name: PHPFileManager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de PHPFileManager sur le serveur
+  tags: phpfilemanager,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/phpfilemanager/"
+      - "{{BaseURL}}/php-filemanager/"
+      - "{{BaseURL}}/phpfilemanager/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "PHPFileManager"
+          - "phpfilemanager"
+          - "php-filemanager"
+        condition: or
+

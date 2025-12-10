@@ -1,0 +1,26 @@
+id: tiny-file-manager-detection
+
+info:
+  name: Tiny File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Tiny File Manager sur le serveur
+  tags: tiny-file-manager,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/tinyfilemanager.php"
+      - "{{BaseURL}}/filemanager.php"
+      - "{{BaseURL}}/tfm.php"
+      - "{{BaseURL}}/tinyfm.php"
+      - "{{BaseURL}}/file-manager.php"
+
+    matchers:
+      - type: word
+        words:
+          - "Tiny File Manager"
+          - "tinyfilemanager"
+          - "tfm"
+        condition: or
+

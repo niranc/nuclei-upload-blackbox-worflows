@@ -1,0 +1,24 @@
+id: filezilla-server-web-detection
+
+info:
+  name: FileZilla Server Web Interface Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de l'interface web de FileZilla Server (anciennes versions)
+  tags: filezilla,ftp,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/filezilla/"
+      - "{{BaseURL}}/filezilla-server/"
+      - "{{BaseURL}}/filezilla/admin/"
+
+    matchers:
+      - type: word
+        words:
+          - "FileZilla Server"
+          - "filezilla"
+          - "filezilla-server"
+        condition: or
+

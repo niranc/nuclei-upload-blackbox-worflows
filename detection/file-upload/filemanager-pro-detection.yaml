@@ -1,0 +1,25 @@
+id: filemanager-pro-detection
+
+info:
+  name: File Manager Pro Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de File Manager Pro (obsolète)
+  tags: filemanager-pro,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/filemanager-pro/"
+      - "{{BaseURL}}/filemanagerpro/"
+      - "{{BaseURL}}/fmp/"
+      - "{{BaseURL}}/filemanager-pro/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "File Manager Pro"
+          - "filemanager-pro"
+          - "filemanagerpro"
+        condition: or
+

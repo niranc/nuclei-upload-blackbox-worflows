@@ -1,0 +1,25 @@
+id: froala-editor-detection
+
+info:
+  name: Froala Editor Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Froala Editor sur le serveur
+  tags: froala,editor,file-upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/froala-editor/js/froala_editor.min.js"
+      - "{{BaseURL}}/assets/froala-editor/js/froala_editor.min.js"
+      - "{{BaseURL}}/js/froala-editor/js/froala_editor.min.js"
+      - "{{BaseURL}}/libs/froala-editor/js/froala_editor.min.js"
+      - "{{BaseURL}}/froala-editor/"
+
+    matchers:
+      - type: word
+        words:
+          - "Froala"
+          - "froala_editor"
+        condition: or
+

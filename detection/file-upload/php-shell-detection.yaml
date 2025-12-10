@@ -1,0 +1,32 @@
+id: php-shell-detection
+
+info:
+  name: PHP Shell Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte la présence de shells PHP (c99, r57, etc.) - très dangereux
+  tags: php-shell,webshell,obsolete,security
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/c99.php"
+      - "{{BaseURL}}/r57.php"
+      - "{{BaseURL}}/shell.php"
+      - "{{BaseURL}}/phpshell.php"
+      - "{{BaseURL}}/c99shell.php"
+      - "{{BaseURL}}/r57shell.php"
+      - "{{BaseURL}}/wso.php"
+      - "{{BaseURL}}/b374k.php"
+      - "{{BaseURL}}/filesman.php"
+
+    matchers:
+      - type: word
+        words:
+          - "c99 shell"
+          - "r57 shell"
+          - "PHP Shell"
+          - "WSO Shell"
+          - "b374k"
+        condition: or
+

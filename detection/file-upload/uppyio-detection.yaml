@@ -1,0 +1,24 @@
+id: uppyio-detection
+
+info:
+  name: Uppy.io Companion Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'Uppy.io Companion sur le serveur
+  tags: uppyio,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/companion/"
+      - "{{BaseURL}}/uppy-companion/"
+      - "{{BaseURL}}/companion/health"
+
+    matchers:
+      - type: word
+        words:
+          - "uppy-companion"
+          - "companion"
+          - "Uppy.io"
+        condition: or
+

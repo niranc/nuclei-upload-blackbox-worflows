@@ -1,0 +1,24 @@
+id: flowjs-detection
+
+info:
+  name: Flow.js Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Flow.js sur le serveur
+  tags: flowjs,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/flow.js"
+      - "{{BaseURL}}/flowjs/flow.js"
+      - "{{BaseURL}}/assets/flowjs/"
+
+    matchers:
+      - type: word
+        words:
+          - "Flow.js"
+          - "flow.js"
+          - "flowjs"
+        condition: or
+

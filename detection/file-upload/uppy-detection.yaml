@@ -1,0 +1,24 @@
+id: uppy-detection
+
+info:
+  name: Uppy Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'Uppy sur le serveur
+  tags: uppy,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/uppy/"
+      - "{{BaseURL}}/uppy/uppy.min.js"
+      - "{{BaseURL}}/assets/uppy/"
+
+    matchers:
+      - type: word
+        words:
+          - "Uppy"
+          - "uppy"
+          - "uppy.min.js"
+        condition: or
+

@@ -1,0 +1,25 @@
+id: advanced-file-manager-detection
+
+info:
+  name: Advanced File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'Advanced File Manager (obsolète)
+  tags: advanced-file-manager,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/advanced-file-manager/"
+      - "{{BaseURL}}/advancedfilemanager/"
+      - "{{BaseURL}}/afm/"
+      - "{{BaseURL}}/advanced-file-manager/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "Advanced File Manager"
+          - "advanced-file-manager"
+          - "advancedfilemanager"
+        condition: or
+

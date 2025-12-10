@@ -1,0 +1,24 @@
+id: cutefm-detection
+
+info:
+  name: CuteFM Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de CuteFM (ancien file manager, obsolète)
+  tags: cutefm,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/cutefm/"
+      - "{{BaseURL}}/cute-fm/"
+      - "{{BaseURL}}/cutefm/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "CuteFM"
+          - "cutefm"
+          - "cute-fm"
+        condition: or
+

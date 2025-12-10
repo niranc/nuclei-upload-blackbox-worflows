@@ -1,0 +1,24 @@
+id: cloudreve-detection
+
+info:
+  name: Cloudreve Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Cloudreve sur le serveur
+  tags: cloudreve,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/cloudreve/"
+      - "{{BaseURL}}/cloud/"
+      - "{{BaseURL}}/cloudreve/index.html"
+
+    matchers:
+      - type: word
+        words:
+          - "Cloudreve"
+          - "cloudreve"
+          - "cloudreve.js"
+        condition: or
+

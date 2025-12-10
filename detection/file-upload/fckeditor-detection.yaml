@@ -1,0 +1,27 @@
+id: fckeditor-detection
+
+info:
+  name: FCKEditor Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de FCKEditor (ancien nom de CKEditor, obsolète)
+  tags: fckeditor,editor,file-upload,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/fckeditor/"
+      - "{{BaseURL}}/fckeditor/fckeditor.js"
+      - "{{BaseURL}}/FCKeditor/"
+      - "{{BaseURL}}/FCKeditor/FCKeditor.js"
+      - "{{BaseURL}}/assets/fckeditor/"
+      - "{{BaseURL}}/js/fckeditor/"
+
+    matchers:
+      - type: word
+        words:
+          - "FCKEditor"
+          - "fckeditor.js"
+          - "FCKeditor.js"
+        condition: or
+

@@ -1,0 +1,24 @@
+id: wordpress-filemanager-detection
+
+info:
+  name: WordPress File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de plugins de file manager WordPress (anciennes versions)
+  tags: wordpress,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/wp-content/plugins/file-manager/"
+      - "{{BaseURL}}/wp-content/plugins/wp-file-manager/"
+      - "{{BaseURL}}/wp-content/plugins/filemanager/"
+
+    matchers:
+      - type: word
+        words:
+          - "File Manager"
+          - "file-manager"
+          - "wp-file-manager"
+        condition: or
+

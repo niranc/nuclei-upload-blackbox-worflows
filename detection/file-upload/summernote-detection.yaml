@@ -1,0 +1,25 @@
+id: summernote-detection
+
+info:
+  name: Summernote Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Summernote sur le serveur
+  tags: summernote,editor,file-upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/summernote/summernote.min.js"
+      - "{{BaseURL}}/assets/summernote/summernote.min.js"
+      - "{{BaseURL}}/js/summernote/summernote.min.js"
+      - "{{BaseURL}}/libs/summernote/summernote.min.js"
+      - "{{BaseURL}}/summernote/"
+
+    matchers:
+      - type: word
+        words:
+          - "Summernote"
+          - "summernote.min.js"
+        condition: or
+

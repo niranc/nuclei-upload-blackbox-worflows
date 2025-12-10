@@ -1,0 +1,24 @@
+id: owncloud-detection
+
+info:
+  name: ownCloud Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'ownCloud sur le serveur
+  tags: owncloud,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/owncloud/"
+      - "{{BaseURL}}/oc/"
+      - "{{BaseURL}}/owncloud/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "ownCloud"
+          - "owncloud"
+          - "oc-apps"
+        condition: or
+

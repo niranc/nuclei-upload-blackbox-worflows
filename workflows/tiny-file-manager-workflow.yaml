@@ -1,0 +1,13 @@
+id: tiny-file-manager-workflow
+
+info:
+  name: Tiny File Manager Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte Tiny File Manager et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/tiny-file-manager-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/tiny-file-manager-upload.yaml
+      - tags: tiny-file-manager
+

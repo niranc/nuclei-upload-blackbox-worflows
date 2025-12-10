@@ -1,0 +1,25 @@
+id: phpfm-old-detection
+
+info:
+  name: PHPFM Old Version Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'anciennes versions de PHPFM (vulnérables)
+  tags: phpfm,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/phpfm/"
+      - "{{BaseURL}}/phpfm/index.php"
+      - "{{BaseURL}}/phpfm/phpfm.php"
+
+    matchers:
+      - type: word
+        words:
+          - "PHPFM"
+          - "phpfm"
+          - "version 1.0"
+          - "version 1.1"
+        condition: or
+

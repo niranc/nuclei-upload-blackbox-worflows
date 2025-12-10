@@ -1,0 +1,25 @@
+id: uploadify-detection
+
+info:
+  name: Uploadify Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'Uploadify sur le serveur
+  tags: uploadify,file-upload,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/uploadify/jquery.uploadify.min.js"
+      - "{{BaseURL}}/assets/uploadify/jquery.uploadify.min.js"
+      - "{{BaseURL}}/js/uploadify/jquery.uploadify.min.js"
+      - "{{BaseURL}}/libs/uploadify/jquery.uploadify.min.js"
+      - "{{BaseURL}}/uploadify/"
+
+    matchers:
+      - type: word
+        words:
+          - "uploadify"
+          - "jquery.uploadify"
+        condition: or
+

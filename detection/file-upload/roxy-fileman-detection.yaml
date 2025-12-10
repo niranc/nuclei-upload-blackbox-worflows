@@ -1,0 +1,24 @@
+id: roxy-fileman-detection
+
+info:
+  name: Roxy Fileman Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Roxy Fileman sur le serveur
+  tags: roxy-fileman,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/roxyfileman/"
+      - "{{BaseURL}}/roxy-fileman/"
+      - "{{BaseURL}}/fileman/"
+
+    matchers:
+      - type: word
+        words:
+          - "Roxy Fileman"
+          - "roxyfileman"
+          - "roxy-fileman"
+        condition: or
+

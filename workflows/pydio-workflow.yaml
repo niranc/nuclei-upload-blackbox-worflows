@@ -1,0 +1,13 @@
+id: pydio-workflow
+
+info:
+  name: Pydio Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte Pydio et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/pydio-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/pydio-upload.yaml
+      - tags: pydio
+

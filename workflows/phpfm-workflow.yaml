@@ -1,0 +1,13 @@
+id: phpfm-workflow
+
+info:
+  name: PHPFM Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte PHPFM et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/phpfm-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/phpfm-upload.yaml
+      - tags: phpfm
+

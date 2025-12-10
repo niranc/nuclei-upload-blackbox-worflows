@@ -1,0 +1,13 @@
+id: cloudreve-workflow
+
+info:
+  name: Cloudreve Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte Cloudreve et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/cloudreve-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/cloudreve-upload.yaml
+      - tags: cloudreve
+

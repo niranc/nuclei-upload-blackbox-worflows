@@ -1,0 +1,29 @@
+id: editor-generic-detection
+
+info:
+  name: Generic Rich Text Editor Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'éditeurs de texte riches génériques
+  tags: editor,rich-text-editor,generic
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/editor/"
+      - "{{BaseURL}}/editors/"
+      - "{{BaseURL}}/wysiwyg/"
+      - "{{BaseURL}}/rich-editor/"
+      - "{{BaseURL}}/html-editor/"
+      - "{{BaseURL}}/assets/editor/"
+      - "{{BaseURL}}/js/editor/"
+      - "{{BaseURL}}/libs/editor/"
+
+    matchers:
+      - type: word
+        words:
+          - "editor"
+          - "wysiwyg"
+          - "rich text"
+        condition: or
+

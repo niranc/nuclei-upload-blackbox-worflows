@@ -1,0 +1,24 @@
+id: filerun-detection
+
+info:
+  name: FileRun Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de FileRun sur le serveur
+  tags: filerun,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/filerun/"
+      - "{{BaseURL}}/file-run/"
+      - "{{BaseURL}}/filerun/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "FileRun"
+          - "filerun"
+          - "FileRun Web File Manager"
+        condition: or
+

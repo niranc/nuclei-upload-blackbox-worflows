@@ -1,0 +1,24 @@
+id: pydio-detection
+
+info:
+  name: Pydio Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Pydio sur le serveur
+  tags: pydio,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/pydio/"
+      - "{{BaseURL}}/pydio-core/"
+      - "{{BaseURL}}/ajaxplorer/"
+
+    matchers:
+      - type: word
+        words:
+          - "Pydio"
+          - "pydio"
+          - "AjaXplorer"
+        condition: or
+

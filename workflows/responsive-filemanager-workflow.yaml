@@ -1,0 +1,13 @@
+id: responsive-filemanager-workflow
+
+info:
+  name: Responsive FileManager Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte Responsive FileManager et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/responsive-filemanager-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/responsive-filemanager-upload.yaml
+      - tags: responsive-filemanager
+

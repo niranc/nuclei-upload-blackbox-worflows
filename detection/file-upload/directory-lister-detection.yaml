@@ -1,0 +1,24 @@
+id: directory-lister-detection
+
+info:
+  name: Directory Lister Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Directory Lister sur le serveur
+  tags: directory-lister,file-manager,directory-listing
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/directory-lister/"
+      - "{{BaseURL}}/dir-lister/"
+      - "{{BaseURL}}/dl/"
+
+    matchers:
+      - type: word
+        words:
+          - "Directory Lister"
+          - "directory-lister"
+          - "dir-lister"
+        condition: or
+

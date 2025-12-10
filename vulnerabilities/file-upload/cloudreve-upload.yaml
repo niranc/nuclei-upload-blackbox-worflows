@@ -1,0 +1,37 @@
+id: cloudreve-upload
+
+info:
+  name: Cloudreve Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload de Cloudreve
+  tags: cloudreve,file-upload,upload
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/cloudreve/api/v3/file/upload"
+      - "{{BaseURL}}/cloud/api/v3/file/upload"
+      - "{{BaseURL}}/cloudreve/upload"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+        condition: or
+

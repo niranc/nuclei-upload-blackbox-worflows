@@ -1,0 +1,25 @@
+id: simple-file-manager-detection
+
+info:
+  name: Simple File Manager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Simple File Manager (obsolète)
+  tags: simple-file-manager,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/simple-file-manager/"
+      - "{{BaseURL}}/simplefilemanager/"
+      - "{{BaseURL}}/sfm/"
+      - "{{BaseURL}}/simple-file-manager/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "Simple File Manager"
+          - "simple-file-manager"
+          - "simplefilemanager"
+        condition: or
+

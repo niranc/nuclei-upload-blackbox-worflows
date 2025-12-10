@@ -1,0 +1,24 @@
+id: nextcloud-detection
+
+info:
+  name: Nextcloud Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de Nextcloud sur le serveur
+  tags: nextcloud,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/nextcloud/"
+      - "{{BaseURL}}/nc/"
+      - "{{BaseURL}}/nextcloud/index.php"
+
+    matchers:
+      - type: word
+        words:
+          - "Nextcloud"
+          - "nextcloud"
+          - "nc-apps"
+        condition: or
+

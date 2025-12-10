@@ -1,0 +1,24 @@
+id: filebrowser-detection
+
+info:
+  name: FileBrowser Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de FileBrowser sur le serveur
+  tags: filebrowser,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/filebrowser/"
+      - "{{BaseURL}}/file-browser/"
+      - "{{BaseURL}}/fb/"
+
+    matchers:
+      - type: word
+        words:
+          - "FileBrowser"
+          - "filebrowser"
+          - "file-browser"
+        condition: or
+

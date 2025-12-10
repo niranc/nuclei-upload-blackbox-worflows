@@ -1,0 +1,26 @@
+id: asp-shell-detection
+
+info:
+  name: ASP Shell Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte la présence de shells ASP (très dangereux)
+  tags: asp-shell,webshell,obsolete,security
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/cmd.asp"
+      - "{{BaseURL}}/shell.asp"
+      - "{{BaseURL}}/cmd.aspx"
+      - "{{BaseURL}}/shell.aspx"
+      - "{{BaseURL}}/aspcmd.asp"
+
+    matchers:
+      - type: word
+        words:
+          - "ASP Shell"
+          - "cmd.asp"
+          - "Command Shell"
+        condition: or
+

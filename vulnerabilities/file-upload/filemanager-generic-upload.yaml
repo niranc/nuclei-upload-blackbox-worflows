@@ -1,0 +1,51 @@
+id: filemanager-generic-upload
+
+info:
+  name: Generic File Manager Upload Test
+  author: nuclei-templates
+  severity: medium
+  description: Teste les endpoints d'upload génériques pour les file managers
+  tags: file-manager,file-upload,upload,generic
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/filemanager/upload.php"
+      - "{{BaseURL}}/filemanager/upload.aspx"
+      - "{{BaseURL}}/filemanager/upload.jsp"
+      - "{{BaseURL}}/filemanager/upload"
+      - "{{BaseURL}}/upload.php"
+      - "{{BaseURL}}/upload.aspx"
+      - "{{BaseURL}}/upload.jsp"
+      - "{{BaseURL}}/upload"
+      - "{{BaseURL}}/file/upload.php"
+      - "{{BaseURL}}/file/upload.aspx"
+      - "{{BaseURL}}/files/upload.php"
+      - "{{BaseURL}}/files/upload.aspx"
+      - "{{BaseURL}}/admin/upload.php"
+      - "{{BaseURL}}/admin/upload.aspx"
+      - "{{BaseURL}}/manager/upload.php"
+      - "{{BaseURL}}/manager/upload.aspx"
+
+    headers:
+      Content-Type: multipart/form-data; boundary=----WebKitFormBoundary
+
+    body: |
+      ------WebKitFormBoundary
+      Content-Disposition: form-data; name="file"; filename="test.txt"
+      Content-Type: text/plain
+
+      test
+      ------WebKitFormBoundary--
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "uploaded"
+          - "success"
+          - "file"
+        condition: or
+

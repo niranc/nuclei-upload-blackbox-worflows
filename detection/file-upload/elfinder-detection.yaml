@@ -1,0 +1,27 @@
+id: elfinder-detection
+
+info:
+  name: elFinder Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence d'elFinder sur le serveur
+  tags: elfinder,file-manager,upload
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/elfinder/"
+      - "{{BaseURL}}/elfinder/elfinder.html"
+      - "{{BaseURL}}/assets/elfinder/"
+      - "{{BaseURL}}/js/elfinder/"
+      - "{{BaseURL}}/libs/elfinder/"
+      - "{{BaseURL}}/filemanager/elfinder/"
+
+    matchers:
+      - type: word
+        words:
+          - "elFinder"
+          - "elfinder.min.js"
+          - "elfinder.html"
+        condition: or
+

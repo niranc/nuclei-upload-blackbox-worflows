@@ -1,0 +1,13 @@
+id: elfinder-workflow
+
+info:
+  name: elFinder Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte elFinder et teste les vulnérabilités associées
+
+workflows:
+  - template: detection/file-upload/elfinder-detection.yaml
+    subtemplates:
+      - template: vulnerabilities/file-upload/elfinder-upload.yaml
+      - tags: elfinder
+

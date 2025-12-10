@@ -1,0 +1,25 @@
+id: webfilemanager-detection
+
+info:
+  name: WebFileManager Detection
+  author: nuclei-templates
+  severity: info
+  description: Détecte la présence de WebFileManager (très ancien, obsolète)
+  tags: webfilemanager,file-manager,obsolete
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/webfilemanager/"
+      - "{{BaseURL}}/webfilemanager/index.php"
+      - "{{BaseURL}}/wfm/"
+      - "{{BaseURL}}/filemanager/webfilemanager/"
+
+    matchers:
+      - type: word
+        words:
+          - "WebFileManager"
+          - "webfilemanager"
+          - "wfm"
+        condition: or
+
