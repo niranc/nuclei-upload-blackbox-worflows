@@ -1,0 +1,23 @@
+id: gogs-exposed
+
+info:
+  name: Gogs Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Gogs exposées sans authentification
+  tags: gogs,git,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/v1/version"
+
+    matchers:
+      - type: word
+        words:
+          - "Gogs"
+          - "gogs"
+          - "gogs_version"
+        condition: or
+

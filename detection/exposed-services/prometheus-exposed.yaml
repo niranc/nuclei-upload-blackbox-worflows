@@ -1,0 +1,26 @@
+id: prometheus-exposed
+
+info:
+  name: Prometheus Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Prometheus exposées sans authentification
+  tags: prometheus,monitoring,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/metrics"
+      - "{{BaseURL}}/api/v1/query"
+      - "{{BaseURL}}/graph"
+      - "{{BaseURL}}/targets"
+
+    matchers:
+      - type: word
+        words:
+          - "Prometheus"
+          - "prometheus"
+          - "prometheus_time_seconds"
+        condition: or
+

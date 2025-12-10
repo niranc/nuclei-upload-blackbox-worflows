@@ -1,0 +1,24 @@
+id: splunk-exposed
+
+info:
+  name: Splunk Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Splunk exposées sans authentification
+  tags: splunk,monitoring,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/en-US/account/login"
+      - "{{BaseURL}}/services/auth/login"
+
+    matchers:
+      - type: word
+        words:
+          - "Splunk"
+          - "splunk"
+          - "SplunkWeb"
+        condition: or
+

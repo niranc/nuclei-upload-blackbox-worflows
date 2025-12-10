@@ -1,0 +1,25 @@
+id: git-exposed
+
+info:
+  name: Git Repository Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les repositories Git exposés (.git/)
+  tags: git,source-code,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/.git/"
+      - "{{BaseURL}}/.git/config"
+      - "{{BaseURL}}/.git/HEAD"
+      - "{{BaseURL}}/.git/index"
+
+    matchers:
+      - type: word
+        words:
+          - "[core]"
+          - "repositoryformatversion"
+          - "ref: refs/heads"
+        condition: or
+

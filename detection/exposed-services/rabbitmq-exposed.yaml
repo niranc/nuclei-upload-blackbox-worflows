@@ -1,0 +1,24 @@
+id: rabbitmq-exposed
+
+info:
+  name: RabbitMQ Management Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les interfaces RabbitMQ Management exposées
+  tags: rabbitmq,message-queue,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/overview"
+      - "{{BaseURL}}/api/whoami"
+
+    matchers:
+      - type: word
+        words:
+          - "RabbitMQ Management"
+          - "rabbitmq"
+          - "management_version"
+        condition: or
+

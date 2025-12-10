@@ -1,0 +1,23 @@
+id: rethinkdb-exposed
+
+info:
+  name: RethinkDB Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances RethinkDB exposées sans authentification
+  tags: rethinkdb,database,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/rethinkdb"
+
+    matchers:
+      - type: word
+        words:
+          - "RethinkDB"
+          - "rethinkdb"
+          - "rethinkdb_version"
+        condition: or
+

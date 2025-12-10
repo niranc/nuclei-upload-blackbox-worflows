@@ -1,0 +1,24 @@
+id: tomcat-manager-exposed
+
+info:
+  name: Tomcat Manager Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les interfaces Tomcat Manager exposées
+  tags: tomcat,manager,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/manager/html"
+      - "{{BaseURL}}/manager/status"
+      - "{{BaseURL}}/host-manager/html"
+
+    matchers:
+      - type: word
+        words:
+          - "Tomcat Web Application Manager"
+          - "Apache Tomcat"
+          - "Tomcat Manager"
+        condition: or
+

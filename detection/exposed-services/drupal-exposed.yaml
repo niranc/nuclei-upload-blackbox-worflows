@@ -1,0 +1,23 @@
+id: drupal-exposed
+
+info:
+  name: Drupal Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Drupal exposées avec informations sensibles
+  tags: drupal,cms,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/CHANGELOG.txt"
+
+    matchers:
+      - type: word
+        words:
+          - "Drupal"
+          - "drupal"
+          - "DRUPAL_VERSION"
+        condition: or
+

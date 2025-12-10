@@ -1,0 +1,24 @@
+id: harbor-exposed
+
+info:
+  name: Harbor Registry Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Harbor Registry exposées sans authentification
+  tags: harbor,registry,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/v2.0/health"
+      - "{{BaseURL}}/harbor"
+
+    matchers:
+      - type: word
+        words:
+          - "Harbor"
+          - "harbor"
+          - "goharbor"
+        condition: or
+

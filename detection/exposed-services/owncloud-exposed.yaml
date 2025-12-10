@@ -1,0 +1,23 @@
+id: owncloud-exposed
+
+info:
+  name: ownCloud Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances ownCloud exposées sans authentification
+  tags: owncloud,file-sharing,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/status.php"
+
+    matchers:
+      - type: word
+        words:
+          - "ownCloud"
+          - "owncloud"
+          - "owncloud_version"
+        condition: or
+

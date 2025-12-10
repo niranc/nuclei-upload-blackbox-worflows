@@ -1,0 +1,23 @@
+id: jenkins-script-console
+
+info:
+  name: Jenkins Script Console Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte l'accès au script console Jenkins (RCE possible)
+  tags: jenkins,rce,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/script"
+      - "{{BaseURL}}/manage/script"
+
+    matchers:
+      - type: word
+        words:
+          - "Script Console"
+          - "Groovy Script"
+          - "jenkins.model.Jenkins"
+        condition: or
+

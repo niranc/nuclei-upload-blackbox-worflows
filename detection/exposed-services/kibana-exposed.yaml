@@ -1,0 +1,24 @@
+id: kibana-exposed
+
+info:
+  name: Kibana Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Kibana exposées sans authentification
+  tags: kibana,monitoring,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/status"
+      - "{{BaseURL}}/app/kibana"
+
+    matchers:
+      - type: word
+        words:
+          - "Kibana"
+          - "kibana"
+          - "kbnVersion"
+        condition: or
+

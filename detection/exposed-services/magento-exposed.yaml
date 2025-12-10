@@ -1,0 +1,23 @@
+id: magento-exposed
+
+info:
+  name: Magento Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Magento exposées avec informations sensibles
+  tags: magento,ecommerce,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/magento_version"
+
+    matchers:
+      - type: word
+        words:
+          - "Magento"
+          - "magento"
+          - "MAGE"
+        condition: or
+

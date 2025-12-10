@@ -1,0 +1,23 @@
+id: redmine-exposed
+
+info:
+  name: Redmine Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Redmine exposées sans authentification
+  tags: redmine,project-management,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/login"
+
+    matchers:
+      - type: word
+        words:
+          - "Redmine"
+          - "redmine"
+          - "redmine_version"
+        condition: or
+

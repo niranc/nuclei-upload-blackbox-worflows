@@ -1,0 +1,23 @@
+id: s3-bucket-exposed
+
+info:
+  name: S3 Bucket Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les buckets S3 exposés publiquement
+  tags: s3,storage,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/?list-type=2"
+
+    matchers:
+      - type: word
+        words:
+          - "ListBucketResult"
+          - "xmlns=\"http://s3.amazonaws.com/doc/2006-03-01/\""
+          - "AccessDenied"
+        condition: or
+

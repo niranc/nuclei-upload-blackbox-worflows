@@ -1,0 +1,25 @@
+id: backup-directory-exposed
+
+info:
+  name: Backup Directory Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les répertoires de backup exposés
+  tags: backup,directory-listing,exposed,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/backup/"
+      - "{{BaseURL}}/backups/"
+      - "{{BaseURL}}/backupfiles/"
+      - "{{BaseURL}}/old/"
+
+    matchers:
+      - type: word
+        words:
+          - "Index of"
+          - "Parent Directory"
+          - "Directory Listing"
+        condition: or
+

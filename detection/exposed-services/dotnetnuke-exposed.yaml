@@ -1,0 +1,23 @@
+id: dotnetnuke-exposed
+
+info:
+  name: DNN Platform Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances DNN Platform exposées sans authentification
+  tags: dotnetnuke,cms,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/Default.aspx"
+
+    matchers:
+      - type: word
+        words:
+          - "DNN Platform"
+          - "DotNetNuke"
+          - "dnn"
+        condition: or
+

@@ -1,0 +1,23 @@
+id: mongodb-express-exposed
+
+info:
+  name: MongoDB Express Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances MongoDB Express exposées sans authentification
+  tags: mongodb-express,mongodb,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/check"
+
+    matchers:
+      - type: word
+        words:
+          - "MongoDB Express"
+          - "mongo-express"
+          - "mongoexpress"
+        condition: or
+

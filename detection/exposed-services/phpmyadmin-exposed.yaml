@@ -1,0 +1,24 @@
+id: phpmyadmin-exposed
+
+info:
+  name: phpMyAdmin Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances phpMyAdmin exposées sans authentification
+  tags: phpmyadmin,database,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/index.php"
+      - "{{BaseURL}}/setup"
+
+    matchers:
+      - type: word
+        words:
+          - "phpMyAdmin"
+          - "pma_"
+          - "PMA_"
+        condition: or
+

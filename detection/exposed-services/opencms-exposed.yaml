@@ -1,0 +1,23 @@
+id: opencms-exposed
+
+info:
+  name: OpenCMS Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances OpenCMS exposées sans authentification
+  tags: opencms,cms,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/opencms"
+
+    matchers:
+      - type: word
+        words:
+          - "OpenCMS"
+          - "opencms"
+          - "opencms_version"
+        condition: or
+

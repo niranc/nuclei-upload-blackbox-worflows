@@ -1,0 +1,23 @@
+id: weblogic-exposed
+
+info:
+  name: Oracle WebLogic Console Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les consoles WebLogic exposées sans authentification
+  tags: weblogic,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/console"
+      - "{{BaseURL}}/console/login/LoginForm.jsp"
+
+    matchers:
+      - type: word
+        words:
+          - "WebLogic Server"
+          - "weblogic"
+          - "Oracle WebLogic"
+        condition: or
+

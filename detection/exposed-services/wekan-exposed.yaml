@@ -1,0 +1,23 @@
+id: wekan-exposed
+
+info:
+  name: Wekan Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Wekan exposées sans authentification
+  tags: wekan,kanban,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/boards"
+
+    matchers:
+      - type: word
+        words:
+          - "Wekan"
+          - "wekan"
+          - "wekan_version"
+        condition: or
+

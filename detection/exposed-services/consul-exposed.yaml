@@ -1,0 +1,24 @@
+id: consul-exposed
+
+info:
+  name: Consul Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Consul exposées sans authentification
+  tags: consul,service-discovery,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/v1/status/leader"
+      - "{{BaseURL}}/v1/catalog/services"
+      - "{{BaseURL}}/v1/agent/members"
+
+    matchers:
+      - type: word
+        words:
+          - "consul"
+          - "Consul"
+          - "consul.index"
+        condition: or
+

@@ -1,0 +1,25 @@
+id: actuator-exposed
+
+info:
+  name: Spring Boot Actuator Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les endpoints Spring Boot Actuator exposés
+  tags: spring-boot,actuator,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/actuator"
+      - "{{BaseURL}}/actuator/health"
+      - "{{BaseURL}}/actuator/env"
+      - "{{BaseURL}}/actuator/configprops"
+
+    matchers:
+      - type: word
+        words:
+          - "_links"
+          - "actuator"
+          - "configprops"
+        condition: or
+

@@ -1,0 +1,24 @@
+id: solr-exposed
+
+info:
+  name: Apache Solr Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Solr exposées sans authentification
+  tags: solr,search,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/solr/admin/cores"
+      - "{{BaseURL}}/solr/admin/info/system"
+
+    matchers:
+      - type: word
+        words:
+          - "Solr"
+          - "solr"
+          - "solr_spec_version"
+        condition: or
+

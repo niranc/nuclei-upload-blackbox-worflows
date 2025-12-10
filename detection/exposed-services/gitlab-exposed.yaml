@@ -1,0 +1,24 @@
+id: gitlab-exposed
+
+info:
+  name: GitLab Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances GitLab exposées sans authentification
+  tags: gitlab,ci-cd,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/users/sign_in"
+      - "{{BaseURL}}/api/v4/version"
+
+    matchers:
+      - type: word
+        words:
+          - "GitLab"
+          - "gitlab"
+          - "gitlab-shell"
+        condition: or
+

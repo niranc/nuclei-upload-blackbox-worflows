@@ -1,0 +1,23 @@
+id: fluentd-exposed
+
+info:
+  name: Fluentd Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Fluentd exposées sans authentification
+  tags: fluentd,logging,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/plugins.json"
+
+    matchers:
+      - type: word
+        words:
+          - "Fluentd"
+          - "fluentd"
+          - "fluent-plugin"
+        condition: or
+

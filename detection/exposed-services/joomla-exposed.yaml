@@ -1,0 +1,23 @@
+id: joomla-exposed
+
+info:
+  name: Joomla Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Joomla exposées avec informations sensibles
+  tags: joomla,cms,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/administrator"
+
+    matchers:
+      - type: word
+        words:
+          - "Joomla"
+          - "joomla"
+          - "JVersion"
+        condition: or
+

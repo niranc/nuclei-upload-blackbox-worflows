@@ -1,0 +1,23 @@
+id: pgadmin-exposed
+
+info:
+  name: pgAdmin Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances pgAdmin exposées sans authentification
+  tags: pgadmin,database,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/misc/login"
+
+    matchers:
+      - type: word
+        words:
+          - "pgAdmin"
+          - "pgadmin"
+          - "pgAdmin 4"
+        condition: or
+

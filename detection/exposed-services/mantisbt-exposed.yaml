@@ -1,0 +1,23 @@
+id: mantisbt-exposed
+
+info:
+  name: MantisBT Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances MantisBT exposées sans authentification
+  tags: mantisbt,issue-tracking,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/login_page.php"
+
+    matchers:
+      - type: word
+        words:
+          - "MantisBT"
+          - "mantis"
+          - "mantisbt"
+        condition: or
+

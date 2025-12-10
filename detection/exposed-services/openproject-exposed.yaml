@@ -1,0 +1,23 @@
+id: openproject-exposed
+
+info:
+  name: OpenProject Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances OpenProject exposées sans authentification
+  tags: openproject,project-management,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/v3/status"
+
+    matchers:
+      - type: word
+        words:
+          - "OpenProject"
+          - "openproject"
+          - "openproject_version"
+        condition: or
+

@@ -1,0 +1,24 @@
+id: memcached-exposed
+
+info:
+  name: Memcached Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Memcached exposées via interface web
+  tags: memcached,cache,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/memcached"
+      - "{{BaseURL}}/memcache"
+      - "{{BaseURL}}/cache"
+
+    matchers:
+      - type: word
+        words:
+          - "memcached"
+          - "Memcached"
+          - "STAT"
+        condition: or
+

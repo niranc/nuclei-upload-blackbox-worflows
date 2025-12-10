@@ -1,0 +1,23 @@
+id: rocketchat-exposed
+
+info:
+  name: Rocket.Chat Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Rocket.Chat exposées sans authentification
+  tags: rocketchat,chat,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/info"
+
+    matchers:
+      - type: word
+        words:
+          - "Rocket.Chat"
+          - "rocketchat"
+          - "rocket.chat"
+        condition: or
+

@@ -1,0 +1,27 @@
+id: env-file-exposed
+
+info:
+  name: Environment File Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les fichiers .env exposés (credentials, secrets)
+  tags: env,credentials,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/.env"
+      - "{{BaseURL}}/.env.local"
+      - "{{BaseURL}}/.env.production"
+      - "{{BaseURL}}/env"
+      - "{{BaseURL}}/environment"
+
+    matchers:
+      - type: word
+        words:
+          - "DB_PASSWORD"
+          - "API_KEY"
+          - "SECRET_KEY"
+          - "DATABASE_URL"
+        condition: or
+

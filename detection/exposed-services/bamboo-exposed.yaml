@@ -1,0 +1,23 @@
+id: bamboo-exposed
+
+info:
+  name: Bamboo Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Bamboo exposées sans authentification
+  tags: bamboo,ci-cd,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/rest/api/latest/server"
+
+    matchers:
+      - type: word
+        words:
+          - "Bamboo"
+          - "bamboo"
+          - "atlassian-bamboo"
+        condition: or
+

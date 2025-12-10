@@ -1,0 +1,119 @@
+id: exposed-services-workflow
+
+info:
+  name: Exposed Services Security Checks
+  author: nuclei-templates
+  description: Workflow qui détecte et teste les services exposés sans authentification
+
+workflows:
+  - template: detection/exposed-services/prometheus-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/prometheus-data-exposure.yaml
+      - tags: prometheus
+  - template: detection/exposed-services/grafana-exposed.yaml
+    subtemplates:
+      - tags: grafana
+  - template: detection/exposed-services/jenkins-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/jenkins-rce.yaml
+      - tags: jenkins
+  - template: detection/exposed-services/jenkins-script-console.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/jenkins-rce.yaml
+      - tags: jenkins
+  - template: detection/exposed-services/elasticsearch-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/elasticsearch-rce.yaml
+      - tags: elasticsearch
+  - template: detection/exposed-services/kibana-exposed.yaml
+    subtemplates:
+      - tags: kibana
+  - template: detection/exposed-services/splunk-exposed.yaml
+    subtemplates:
+      - tags: splunk
+  - template: detection/exposed-services/docker-registry-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/docker-registry-pull.yaml
+      - tags: docker
+  - template: detection/exposed-services/kubernetes-dashboard-exposed.yaml
+    subtemplates:
+      - tags: kubernetes
+  - template: detection/exposed-services/consul-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/consul-kv-access.yaml
+      - tags: consul
+  - template: detection/exposed-services/vault-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/vault-secrets-access.yaml
+      - tags: vault
+  - template: detection/exposed-services/s3-bucket-exposed.yaml
+    subtemplates:
+      - tags: s3
+  - template: detection/exposed-services/phpinfo-exposed.yaml
+    subtemplates:
+      - tags: phpinfo
+  - template: detection/exposed-services/git-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/git-credentials-extract.yaml
+      - tags: git
+  - template: detection/exposed-services/svn-exposed.yaml
+    subtemplates:
+      - tags: svn
+  - template: detection/exposed-services/env-file-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/env-credentials-extract.yaml
+      - tags: env
+  - template: detection/exposed-services/backup-files-exposed.yaml
+    subtemplates:
+      - tags: backup
+  - template: detection/exposed-services/actuator-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/actuator-env-exposure.yaml
+      - tags: actuator
+  - template: detection/exposed-services/swagger-exposed.yaml
+    subtemplates:
+      - tags: swagger
+  - template: detection/exposed-services/solr-exposed.yaml
+    subtemplates:
+      - template: vulnerabilities/exposed-services/solr-rce.yaml
+      - tags: solr
+  - template: detection/exposed-services/rabbitmq-exposed.yaml
+    subtemplates:
+      - tags: rabbitmq
+  - template: detection/exposed-services/jupyter-exposed.yaml
+    subtemplates:
+      - tags: jupyter
+  - template: detection/exposed-services/wp-config-exposed.yaml
+    subtemplates:
+      - tags: wordpress
+  - template: detection/exposed-services/phpmyadmin-exposed.yaml
+    subtemplates:
+      - tags: phpmyadmin
+  - template: detection/exposed-services/weblogic-exposed.yaml
+    subtemplates:
+      - tags: weblogic
+  - template: detection/exposed-services/minio-exposed.yaml
+    subtemplates:
+      - tags: minio
+  - template: detection/exposed-services/airflow-exposed.yaml
+    subtemplates:
+      - tags: airflow
+  - template: detection/exposed-services/druid-exposed.yaml
+    subtemplates:
+      - tags: druid
+  - template: detection/exposed-services/tomcat-manager-exposed.yaml
+    subtemplates:
+      - tags: tomcat
+  - template: detection/exposed-services/wordpress-xmlrpc.yaml
+    subtemplates:
+      - tags: wordpress
+  - template: detection/exposed-services/backup-directory-exposed.yaml
+    subtemplates:
+      - tags: backup
+  - template: detection/exposed-services/aws-credentials-exposed.yaml
+    subtemplates:
+      - tags: aws
+  - template: detection/exposed-services/database-config-exposed.yaml
+    subtemplates:
+      - tags: database
+

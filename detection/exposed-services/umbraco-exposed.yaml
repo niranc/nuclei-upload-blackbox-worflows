@@ -1,0 +1,23 @@
+id: umbraco-exposed
+
+info:
+  name: Umbraco Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Umbraco exposées sans authentification
+  tags: umbraco,cms,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/umbraco"
+
+    matchers:
+      - type: word
+        words:
+          - "Umbraco"
+          - "umbraco"
+          - "umbraco_version"
+        condition: or
+

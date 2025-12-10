@@ -1,0 +1,23 @@
+id: matrix-exposed
+
+info:
+  name: Matrix Synapse Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Matrix Synapse exposées sans authentification
+  tags: matrix,chat,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/_matrix/client/versions"
+      - "{{BaseURL}}/_matrix/federation/v1/version"
+
+    matchers:
+      - type: word
+        words:
+          - "matrix"
+          - "Matrix"
+          - "synapse"
+        condition: or
+

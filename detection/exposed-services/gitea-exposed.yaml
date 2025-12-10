@@ -1,0 +1,23 @@
+id: gitea-exposed
+
+info:
+  name: Gitea Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Gitea exposées sans authentification
+  tags: gitea,git,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/v1/version"
+
+    matchers:
+      - type: word
+        words:
+          - "Gitea"
+          - "gitea"
+          - "gitea_version"
+        condition: or
+

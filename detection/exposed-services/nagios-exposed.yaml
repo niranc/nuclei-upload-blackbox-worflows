@@ -1,0 +1,24 @@
+id: nagios-exposed
+
+info:
+  name: Nagios Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Nagios exposées sans authentification
+  tags: nagios,monitoring,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/nagios"
+      - "{{BaseURL}}/nagios3"
+
+    matchers:
+      - type: word
+        words:
+          - "Nagios"
+          - "nagios"
+          - "NAGIOS_VERSION"
+        condition: or
+

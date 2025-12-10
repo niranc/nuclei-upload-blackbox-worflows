@@ -1,0 +1,23 @@
+id: redisinsight-exposed
+
+info:
+  name: RedisInsight Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances RedisInsight exposées sans authentification
+  tags: redisinsight,redis,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/health"
+
+    matchers:
+      - type: word
+        words:
+          - "RedisInsight"
+          - "redisinsight"
+          - "Redis Insight"
+        condition: or
+

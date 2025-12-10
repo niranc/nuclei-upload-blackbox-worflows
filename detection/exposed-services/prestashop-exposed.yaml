@@ -1,0 +1,23 @@
+id: prestashop-exposed
+
+info:
+  name: PrestaShop Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances PrestaShop exposées avec informations sensibles
+  tags: prestashop,ecommerce,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/app/config/parameters.php"
+
+    matchers:
+      - type: word
+        words:
+          - "PrestaShop"
+          - "prestashop"
+          - "PRESTASHOP_VERSION"
+        condition: or
+

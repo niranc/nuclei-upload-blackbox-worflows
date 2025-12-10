@@ -1,0 +1,25 @@
+id: consul-kv-access
+
+info:
+  name: Consul KV Access
+  author: nuclei-templates
+  severity: critical
+  description: Teste l'accès au Key-Value store Consul
+  tags: consul,kv,access,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/v1/kv/?recurse"
+      - "{{BaseURL}}/v1/kv/"
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "Key"
+          - "Value"
+        condition: or
+

@@ -1,0 +1,23 @@
+id: solr-rce
+
+info:
+  name: Apache Solr RCE Detection
+  author: nuclei-templates
+  severity: critical
+  description: Teste l'exécution de code via Solr
+  tags: solr,rce,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/solr/admin/cores?action=CREATE&name=test"
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "test"
+        condition: or
+

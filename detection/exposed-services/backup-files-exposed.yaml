@@ -1,0 +1,32 @@
+id: backup-files-exposed
+
+info:
+  name: Backup Files Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les fichiers de backup exposés
+  tags: backup,information-disclosure,exposed,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/backup.sql"
+      - "{{BaseURL}}/backup.tar.gz"
+      - "{{BaseURL}}/backup.zip"
+      - "{{BaseURL}}/database.sql"
+      - "{{BaseURL}}/dump.sql"
+      - "{{BaseURL}}/.sql"
+      - "{{BaseURL}}/.bak"
+      - "{{BaseURL}}/.backup"
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "CREATE TABLE"
+          - "INSERT INTO"
+          - "PK"
+        condition: or
+

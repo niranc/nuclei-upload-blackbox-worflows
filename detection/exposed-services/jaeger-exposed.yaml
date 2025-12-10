@@ -1,0 +1,23 @@
+id: jaeger-exposed
+
+info:
+  name: Jaeger Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Jaeger exposées sans authentification
+  tags: jaeger,tracing,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/services"
+
+    matchers:
+      - type: word
+        words:
+          - "Jaeger"
+          - "jaeger"
+          - "jaeger-query"
+        condition: or
+

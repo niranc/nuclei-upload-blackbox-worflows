@@ -1,0 +1,24 @@
+id: airflow-exposed
+
+info:
+  name: Apache Airflow Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Airflow exposées sans authentification
+  tags: airflow,workflow,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/admin"
+      - "{{BaseURL}}/api/v1/version"
+
+    matchers:
+      - type: word
+        words:
+          - "Airflow"
+          - "airflow"
+          - "Apache Airflow"
+        condition: or
+

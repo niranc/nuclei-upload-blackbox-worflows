@@ -1,0 +1,26 @@
+id: phpinfo-exposed
+
+info:
+  name: PHPInfo Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les fichiers phpinfo.php exposés (fuite d'informations)
+  tags: phpinfo,information-disclosure,exposed,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/phpinfo.php"
+      - "{{BaseURL}}/info.php"
+      - "{{BaseURL}}/phpinfo"
+      - "{{BaseURL}}/test.php"
+      - "{{BaseURL}}/php.php"
+
+    matchers:
+      - type: word
+        words:
+          - "phpinfo()"
+          - "PHP Version"
+          - "System"
+        condition: or
+

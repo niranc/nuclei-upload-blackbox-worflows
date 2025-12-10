@@ -1,0 +1,23 @@
+id: ghost-exposed
+
+info:
+  name: Ghost CMS Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Ghost CMS exposées sans authentification
+  tags: ghost,cms,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/ghost/api/v3/admin"
+
+    matchers:
+      - type: word
+        words:
+          - "Ghost"
+          - "ghost"
+          - "ghost_version"
+        condition: or
+

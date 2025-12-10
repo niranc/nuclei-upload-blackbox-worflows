@@ -1,0 +1,24 @@
+id: jupyter-exposed
+
+info:
+  name: Jupyter Notebook Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Jupyter Notebook exposées sans authentification
+  tags: jupyter,notebook,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/tree"
+      - "{{BaseURL}}/api/kernels"
+
+    matchers:
+      - type: word
+        words:
+          - "Jupyter Notebook"
+          - "jupyter"
+          - "jupyter-config-data"
+        condition: or
+

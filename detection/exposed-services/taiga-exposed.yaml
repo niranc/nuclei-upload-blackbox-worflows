@@ -1,0 +1,23 @@
+id: taiga-exposed
+
+info:
+  name: Taiga Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Taiga exposées sans authentification
+  tags: taiga,project-management,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/v1/version"
+
+    matchers:
+      - type: word
+        words:
+          - "Taiga"
+          - "taiga"
+          - "taiga_version"
+        condition: or
+

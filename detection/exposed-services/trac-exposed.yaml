@@ -1,0 +1,23 @@
+id: trac-exposed
+
+info:
+  name: Trac Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Trac exposées sans authentification
+  tags: trac,project-management,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/login"
+
+    matchers:
+      - type: word
+        words:
+          - "Trac"
+          - "trac"
+          - "trac_version"
+        condition: or
+

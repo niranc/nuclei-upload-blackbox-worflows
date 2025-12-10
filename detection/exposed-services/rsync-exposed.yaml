@@ -1,0 +1,25 @@
+id: rsync-exposed
+
+info:
+  name: RSync Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les modules RSync exposés via HTTP
+  tags: rsync,file-transfer,exposed,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/rsync"
+
+    headers:
+      User-Agent: rsync
+
+    matchers:
+      - type: word
+        words:
+          - "@RSYNCD"
+          - "rsync"
+        condition: or
+

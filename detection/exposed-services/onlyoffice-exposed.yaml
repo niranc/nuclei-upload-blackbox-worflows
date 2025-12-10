@@ -1,0 +1,23 @@
+id: onlyoffice-exposed
+
+info:
+  name: OnlyOffice Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances OnlyOffice exposées sans authentification
+  tags: onlyoffice,office,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/2.0/healthcheck"
+
+    matchers:
+      - type: word
+        words:
+          - "OnlyOffice"
+          - "onlyoffice"
+          - "onlyoffice_version"
+        condition: or
+

@@ -1,0 +1,23 @@
+id: postgresql-exposed
+
+info:
+  name: PostgreSQL Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances PostgreSQL exposées via interface web
+  tags: postgresql,database,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/adminer.php"
+      - "{{BaseURL}}/pgadmin"
+
+    matchers:
+      - type: word
+        words:
+          - "PostgreSQL"
+          - "postgresql"
+          - "pgAdmin"
+        condition: or
+

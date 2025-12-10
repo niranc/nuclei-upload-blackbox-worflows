@@ -1,0 +1,24 @@
+id: druid-exposed
+
+info:
+  name: Apache Druid Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Druid exposées sans authentification
+  tags: druid,analytics,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/status"
+      - "{{BaseURL}}/druid/coordinator/v1/leader"
+
+    matchers:
+      - type: word
+        words:
+          - "Druid"
+          - "druid"
+          - "druid-version"
+        condition: or
+

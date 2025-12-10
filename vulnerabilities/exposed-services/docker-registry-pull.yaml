@@ -1,0 +1,22 @@
+id: docker-registry-pull
+
+info:
+  name: Docker Registry Image Pull
+  author: nuclei-templates
+  severity: critical
+  description: Teste le pull d'images depuis un registry Docker exposé
+  tags: docker,registry,pull,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/v2/_catalog"
+      - "{{BaseURL}}/v2/"
+
+    matchers:
+      - type: word
+        words:
+          - "repositories"
+          - "name"
+        condition: or
+

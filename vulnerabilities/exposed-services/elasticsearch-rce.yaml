@@ -1,0 +1,34 @@
+id: elasticsearch-rce
+
+info:
+  name: Elasticsearch RCE Detection
+  author: nuclei-templates
+  severity: critical
+  description: Teste l'exécution de code via Elasticsearch
+  tags: elasticsearch,rce,critical
+
+http:
+  - method: POST
+    path:
+      - "{{BaseURL}}/_search"
+
+    headers:
+      Content-Type: application/json
+
+    body: |
+      {
+        "size": 1,
+        "query": {
+          "match_all": {}
+        }
+      }
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "hits"
+        condition: and
+

@@ -1,0 +1,23 @@
+id: zipkin-exposed
+
+info:
+  name: Zipkin Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Zipkin exposées sans authentification
+  tags: zipkin,tracing,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/v2/services"
+
+    matchers:
+      - type: word
+        words:
+          - "Zipkin"
+          - "zipkin"
+          - "zipkin-server"
+        condition: or
+

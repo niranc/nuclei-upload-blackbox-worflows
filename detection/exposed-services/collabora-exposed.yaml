@@ -1,0 +1,23 @@
+id: collabora-exposed
+
+info:
+  name: Collabora Online Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Collabora Online exposées sans authentification
+  tags: collabora,office,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/hosting/discovery"
+
+    matchers:
+      - type: word
+        words:
+          - "Collabora"
+          - "collabora"
+          - "collabora-online"
+        condition: or
+

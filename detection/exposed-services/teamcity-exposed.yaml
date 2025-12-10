@@ -1,0 +1,23 @@
+id: teamcity-exposed
+
+info:
+  name: TeamCity Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances TeamCity exposées sans authentification
+  tags: teamcity,ci-cd,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/login.html"
+
+    matchers:
+      - type: word
+        words:
+          - "TeamCity"
+          - "teamcity"
+          - "TeamCity Server"
+        condition: or
+

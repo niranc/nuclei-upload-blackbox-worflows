@@ -1,0 +1,23 @@
+id: plone-exposed
+
+info:
+  name: Plone Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Plone exposées sans authentification
+  tags: plone,cms,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/Plone"
+
+    matchers:
+      - type: word
+        words:
+          - "Plone"
+          - "plone"
+          - "plone_version"
+        condition: or
+

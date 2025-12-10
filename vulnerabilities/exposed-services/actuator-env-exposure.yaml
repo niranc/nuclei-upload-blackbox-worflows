@@ -1,0 +1,23 @@
+id: actuator-env-exposure
+
+info:
+  name: Spring Boot Actuator Environment Exposure
+  author: nuclei-templates
+  severity: critical
+  description: Teste l'exposition des variables d'environnement via Actuator
+  tags: actuator,env-exposure,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/actuator/env"
+      - "{{BaseURL}}/actuator/configprops"
+
+    matchers:
+      - type: word
+        words:
+          - "password"
+          - "secret"
+          - "key"
+        condition: or
+

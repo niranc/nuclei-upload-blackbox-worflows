@@ -1,0 +1,24 @@
+id: ldap-exposed
+
+info:
+  name: LDAP Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les services LDAP exposés via HTTP
+  tags: ldap,directory,exposed,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/ldap"
+      - "{{BaseURL}}/ldapsearch"
+
+    matchers:
+      - type: word
+        words:
+          - "LDAP"
+          - "ldap"
+          - "distinguishedName"
+        condition: or
+

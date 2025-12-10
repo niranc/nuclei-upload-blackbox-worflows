@@ -1,0 +1,25 @@
+id: prometheus-data-exposure
+
+info:
+  name: Prometheus Data Exposure
+  author: nuclei-templates
+  severity: critical
+  description: Teste l'accès aux données sensibles Prometheus
+  tags: prometheus,data-exposure,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/api/v1/query?query=up"
+      - "{{BaseURL}}/api/v1/targets"
+
+    matchers:
+      - type: status
+        status:
+          - 200
+      - type: word
+        words:
+          - "status"
+          - "targets"
+        condition: or
+

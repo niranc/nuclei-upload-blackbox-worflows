@@ -1,0 +1,26 @@
+id: swagger-exposed
+
+info:
+  name: Swagger UI Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les interfaces Swagger exposées sans authentification
+  tags: swagger,api,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/swagger-ui.html"
+      - "{{BaseURL}}/swagger/"
+      - "{{BaseURL}}/api-docs"
+      - "{{BaseURL}}/swagger.json"
+      - "{{BaseURL}}/swagger.yaml"
+
+    matchers:
+      - type: word
+        words:
+          - "Swagger UI"
+          - "swagger"
+          - "swagger-ui"
+        condition: or
+

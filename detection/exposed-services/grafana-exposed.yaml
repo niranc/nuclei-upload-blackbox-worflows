@@ -1,0 +1,25 @@
+id: grafana-exposed
+
+info:
+  name: Grafana Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Grafana exposées sans authentification
+  tags: grafana,monitoring,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/health"
+      - "{{BaseURL}}/login"
+      - "{{BaseURL}}/api/datasources"
+
+    matchers:
+      - type: word
+        words:
+          - "Grafana"
+          - "grafana"
+          - "window.grafanaBootData"
+        condition: or
+

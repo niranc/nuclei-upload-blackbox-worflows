@@ -1,0 +1,25 @@
+id: elasticsearch-exposed
+
+info:
+  name: Elasticsearch Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Elasticsearch exposées sans authentification
+  tags: elasticsearch,search,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/_cat"
+      - "{{BaseURL}}/_cluster/health"
+      - "{{BaseURL}}/_nodes"
+
+    matchers:
+      - type: word
+        words:
+          - "elasticsearch"
+          - "cluster_name"
+          - "number_of_nodes"
+        condition: or
+

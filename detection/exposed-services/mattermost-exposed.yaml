@@ -1,0 +1,23 @@
+id: mattermost-exposed
+
+info:
+  name: Mattermost Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances Mattermost exposées sans authentification
+  tags: mattermost,chat,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/api/v4/system/ping"
+
+    matchers:
+      - type: word
+        words:
+          - "Mattermost"
+          - "mattermost"
+          - "mattermost_version"
+        condition: or
+

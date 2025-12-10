@@ -1,0 +1,23 @@
+id: typo3-exposed
+
+info:
+  name: TYPO3 Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances TYPO3 exposées avec informations sensibles
+  tags: typo3,cms,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/typo3"
+
+    matchers:
+      - type: word
+        words:
+          - "TYPO3"
+          - "typo3"
+          - "TYPO3_VERSION"
+        condition: or
+

@@ -1,0 +1,23 @@
+id: opencart-exposed
+
+info:
+  name: OpenCart Exposed Detection
+  author: nuclei-templates
+  severity: high
+  description: Détecte les instances OpenCart exposées avec informations sensibles
+  tags: opencart,ecommerce,exposed,no-auth,high
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/index.php?route=common/home"
+
+    matchers:
+      - type: word
+        words:
+          - "OpenCart"
+          - "opencart"
+          - "VERSION"
+        condition: or
+

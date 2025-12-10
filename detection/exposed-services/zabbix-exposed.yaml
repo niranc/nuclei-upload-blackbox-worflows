@@ -1,0 +1,24 @@
+id: zabbix-exposed
+
+info:
+  name: Zabbix Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les instances Zabbix exposées sans authentification
+  tags: zabbix,monitoring,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/"
+      - "{{BaseURL}}/zabbix"
+      - "{{BaseURL}}/api_jsonrpc.php"
+
+    matchers:
+      - type: word
+        words:
+          - "Zabbix"
+          - "zabbix"
+          - "ZABBIX_VERSION"
+        condition: or
+

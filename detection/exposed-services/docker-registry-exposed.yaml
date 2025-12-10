@@ -1,0 +1,22 @@
+id: docker-registry-exposed
+
+info:
+  name: Docker Registry Exposed Detection
+  author: nuclei-templates
+  severity: critical
+  description: Détecte les registries Docker exposés sans authentification
+  tags: docker,registry,exposed,no-auth,critical
+
+http:
+  - method: GET
+    path:
+      - "{{BaseURL}}/v2/"
+      - "{{BaseURL}}/v2/_catalog"
+
+    matchers:
+      - type: word
+        words:
+          - "Docker-Distribution-Api-Version"
+          - "registry/2.0"
+        condition: or
+
